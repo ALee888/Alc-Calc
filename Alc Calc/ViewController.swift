@@ -10,6 +10,9 @@ import Foundation
 
 class ViewController: UIViewController {
 
+    
+    @IBOutlet weak var drinkLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -30,6 +33,11 @@ class ViewController: UIViewController {
           print("HealthKit Successfully Authorized.")
         }
     }
+    
+    @IBAction func drink(_ sender: Any) {
+        
+    }
+    
 
 
 }

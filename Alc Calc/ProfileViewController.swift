@@ -12,6 +12,7 @@ class ProfileViewController: UIViewController {
 
     @IBOutlet private var nameLabel:UILabel!
     @IBOutlet private var ageLabel:UILabel!
+    @IBOutlet private var weightLabel:UILabel!
     @IBOutlet private var biologicalSexLabel:UILabel!
     
     private let profile = Profile()
@@ -25,6 +26,7 @@ class ProfileViewController: UIViewController {
     
     private func updateHealthInfo() {
         loadAndDisplaySexAndAge()
+        loadAndDisplayMostRecentWeight()
     }
     private func loadAndDisplaySexAndAge() {
         do {
@@ -37,7 +39,38 @@ class ProfileViewController: UIViewController {
             print("error")
         }
     }
-
+    
+    private func loadAndDisplayMostRecentWeight() {
+        //1. Use HealthKit to create the Height Sample Type
+        guard let weightSampleType = HKSampleType.quantityType(forIdentifier: .bodyMass) else {
+          print("Body Mass Sample Type is no longer available in HealthKit")
+          return
+        }
+            
+        ProfileDataStore.getMostRecentSample(for: weightSampleType) { (sample, error) in
+              
+          guard let sample = sample else {
+                
+            if let error = error {
+                print("ERROR")
+            }
+            return
+          }
+              
+          let weightInKilograms = sample.quantity.doubleValue(for: HKUnit.pound())
+          self.profile.weight = weightInKilograms
+          self.updateLabels()
+        }
+    }
+    
+    private func saveBloodAlcoholContentToHealthKit() {
+        guard let bloodAlcoholContent = profile.bloodAlcoholContent else {
+            print("missing bac")
+            return
+        }
+        ProfileDataStore.saveBloodAlcoholContent(bloodAlcoholContent: bloodAlcoholContent, date: Date())
+    }
+    
     private func updateLabels(){
         if let age = profile.age {
             print(age)
@@ -55,6 +88,19 @@ class ProfileViewController: UIViewController {
                 biologicalSexLabel.text = "Other"
             }
         }
+        if let weight = profile.weight {
+            print(weight)
+            weightLabel.text = "\(weight)"
+        }
+    }
+    
+    func addDrinks()
+    {
+        profile.drinks += 1
+    }
+    func getDrinks() -> Double{
+        let person = profile
+        return person.drinks
     }
     /*
     // MARK: - Navigation
