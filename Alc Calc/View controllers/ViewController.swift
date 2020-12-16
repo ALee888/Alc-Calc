@@ -7,9 +7,12 @@
 
 import UIKit
 import Foundation
+import CoreData
 
 class ViewController: UIViewController {
-
+    
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    let drinks = [Drink]()
     
     @IBOutlet weak var drinkLabel: UILabel!
     
@@ -38,7 +41,16 @@ class ViewController: UIViewController {
         
     }
     
-
-
+    func saveDrink()
+    {
+        do
+        {
+            try(context.save())
+        }
+        catch
+        {
+            print("Error saving categories \(error)")
+        }
+    }
 }
 

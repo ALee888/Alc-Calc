@@ -20,6 +20,10 @@
 		1D54235325870022001DDF2B /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D54235225870022001DDF2B /* Profile.swift */; };
 		1D54235825870372001DDF2B /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D54235725870372001DDF2B /* ProfileViewController.swift */; };
 		1D54235D25870787001DDF2B /* ProfileDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D54235C25870787001DDF2B /* ProfileDataStore.swift */; };
+		F416EDD72589CF46006098DE /* Alc Calc.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F416EDD52589CF46006098DE /* Alc Calc.xcdatamodeld */; };
+		F416EDDD2589D099006098DE /* Drink+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F416EDDB2589D099006098DE /* Drink+CoreDataClass.swift */; };
+		F416EDDE2589D099006098DE /* Drink+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F416EDDC2589D099006098DE /* Drink+CoreDataProperties.swift */; };
+		F416EDE32589D527006098DE /* DrinkTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F416EDE22589D527006098DE /* DrinkTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +64,10 @@
 		1D54235225870022001DDF2B /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		1D54235725870372001DDF2B /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		1D54235C25870787001DDF2B /* ProfileDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDataStore.swift; sourceTree = "<group>"; };
+		F416EDD62589CF46006098DE /* Alc Calc.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Alc Calc.xcdatamodel"; sourceTree = "<group>"; };
+		F416EDDB2589D099006098DE /* Drink+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Drink+CoreDataClass.swift"; path = "Alc Calc/Drink+CoreDataClass.swift"; sourceTree = "<group>"; };
+		F416EDDC2589D099006098DE /* Drink+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Drink+CoreDataProperties.swift"; path = "Alc Calc/Drink+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		F416EDE22589D527006098DE /* DrinkTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +99,8 @@
 		1D5423042586F646001DDF2B = {
 			isa = PBXGroup;
 			children = (
+				F416EDDB2589D099006098DE /* Drink+CoreDataClass.swift */,
+				F416EDDC2589D099006098DE /* Drink+CoreDataProperties.swift */,
 				1D54230F2586F646001DDF2B /* Alc Calc */,
 				1D5423262586F647001DDF2B /* Alc CalcTests */,
 				1D5423312586F648001DDF2B /* Alc CalcUITests */,
@@ -115,15 +125,14 @@
 				1D5423462586F7E8001DDF2B /* Alc Calc.entitlements */,
 				1D5423102586F646001DDF2B /* AppDelegate.swift */,
 				1D5423122586F646001DDF2B /* SceneDelegate.swift */,
-				1D5423142586F646001DDF2B /* ViewController.swift */,
-				1D54235C25870787001DDF2B /* ProfileDataStore.swift */,
 				1D54234D2586F8E2001DDF2B /* HealthKitSetupAssistant.swift */,
+				F416EDE82589D549006098DE /* Models */,
+				F416EDE72589D52E006098DE /* View controllers */,
 				1D5423162586F646001DDF2B /* Main.storyboard */,
 				1D5423192586F647001DDF2B /* Assets.xcassets */,
 				1D54231B2586F647001DDF2B /* LaunchScreen.storyboard */,
 				1D54231E2586F647001DDF2B /* Info.plist */,
-				1D54235225870022001DDF2B /* Profile.swift */,
-				1D54235725870372001DDF2B /* ProfileViewController.swift */,
+				F416EDD52589CF46006098DE /* Alc Calc.xcdatamodeld */,
 			);
 			path = "Alc Calc";
 			sourceTree = "<group>";
@@ -152,6 +161,25 @@
 				1D5423482586F7E8001DDF2B /* HealthKit.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F416EDE72589D52E006098DE /* View controllers */ = {
+			isa = PBXGroup;
+			children = (
+				1D5423142586F646001DDF2B /* ViewController.swift */,
+				1D54235725870372001DDF2B /* ProfileViewController.swift */,
+				F416EDE22589D527006098DE /* DrinkTableViewController.swift */,
+			);
+			path = "View controllers";
+			sourceTree = "<group>";
+		};
+		F416EDE82589D549006098DE /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				1D54235225870022001DDF2B /* Profile.swift */,
+				1D54235C25870787001DDF2B /* ProfileDataStore.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -284,10 +312,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F416EDD72589CF46006098DE /* Alc Calc.xcdatamodeld in Sources */,
 				1D54235825870372001DDF2B /* ProfileViewController.swift in Sources */,
+				F416EDE32589D527006098DE /* DrinkTableViewController.swift in Sources */,
+				F416EDDE2589D099006098DE /* Drink+CoreDataProperties.swift in Sources */,
 				1D5423152586F646001DDF2B /* ViewController.swift in Sources */,
 				1D54235325870022001DDF2B /* Profile.swift in Sources */,
 				1D54234E2586F8E2001DDF2B /* HealthKitSetupAssistant.swift in Sources */,
+				F416EDDD2589D099006098DE /* Drink+CoreDataClass.swift in Sources */,
 				1D5423112586F646001DDF2B /* AppDelegate.swift in Sources */,
 				1D54235D25870787001DDF2B /* ProfileDataStore.swift in Sources */,
 				1D5423132586F646001DDF2B /* SceneDelegate.swift in Sources */,
@@ -625,6 +657,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		F416EDD52589CF46006098DE /* Alc Calc.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				F416EDD62589CF46006098DE /* Alc Calc.xcdatamodel */,
+			);
+			currentVersion = F416EDD62589CF46006098DE /* Alc Calc.xcdatamodel */;
+			path = "Alc Calc.xcdatamodeld";
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 1D5423052586F646001DDF2B /* Project object */;
 }
