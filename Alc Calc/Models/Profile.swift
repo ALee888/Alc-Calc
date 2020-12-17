@@ -18,15 +18,18 @@ class Profile {
         guard let w = weight, let sex = biologicalSex, w > 0 else {
             return nil
         }
-        let ounces = drinks
+        let weightGrams = w * 454
+        let grams = drinks * 14
         let sexConstant: Double
         if sex.rawValue == 2{
-            sexConstant = 3.75
+            sexConstant = 0.55
         } else {
-            sexConstant = 4.7
+            sexConstant = 0.68
         }
+        
+        
         // MAXIMUM BAC without time
-        return (((ounces)*(sexConstant))/w)
+        return ((grams)/(weightGrams*sexConstant))*100
         
     }
     

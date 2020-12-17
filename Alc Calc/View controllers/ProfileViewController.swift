@@ -7,6 +7,7 @@
 
 import UIKit
 import HealthKit
+import CoreData
 
 class ProfileViewController: UITableViewController {
 
@@ -14,8 +15,17 @@ class ProfileViewController: UITableViewController {
     @IBOutlet private var ageLabel:UILabel!
     @IBOutlet private var weightLabel:UILabel!
     @IBOutlet private var biologicalSexLabel:UILabel!
-    @IBOutlet private var BAC: UILabel!
+    @IBOutlet private var BACLabel: UILabel!
+    
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    var drinks = [Drink]()
     private let profile = Profile()
+    
+    private enum ProfileSection: Int{
+        case userInfo
+        case bloodAlcoholContent
+        case saveBAC
+    }
     
     override func viewDidLoad() {
         
@@ -23,6 +33,13 @@ class ProfileViewController: UITableViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        loadDrinks()
+        drinksOverTime()
+        profile.drinks = Double(drinks.count)
+        updateLabels()
     }
     
     private func updateHealthInfo() {
@@ -93,6 +110,57 @@ class ProfileViewController: UITableViewController {
             print(weight)
             weightLabel.text = "\(weight)"
         }
+        if let BAC = profile.bloodAlcoholContent {
+            print(BAC)
+            BACLabel.text = "\(BAC)"
+        }
+    }
+    
+    private func drinksOverTime(){
+        var pastDrinks = [Drink]()
+        let now = Date()
+        let yesterday = Date().dayBefore
+        print("Today:\(now) Yesterday: \(yesterday)")
+        
+        for drink in drinks {
+            if drink.time! >= yesterday && drink.time! <= now
+            {
+                pastDrinks.append(drink)
+            }
+        }
+        print("Past 24 hr: \(pastDrinks)")
+        var latestDrink = Drink()
+        if pastDrinks.count == 0 {
+            print (0)
+        } else if pastDrinks.count >= 1 {
+            latestDrink = pastDrinks[0]
+            if pastDrinks.count > 1 {
+                for drink in pastDrinks {
+                    if drink.time! < latestDrink.time! {
+                        latestDrink = drink
+                    }
+                }
+            }
+        }
+        let timeDrinking = Date().timeIntervalSince(latestDrink.time!)
+        
+        print (timeDrinking)
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        guard let section = ProfileSection(rawValue: indexPath.section) else {
+            print("there was an error selecting the cell")
+            return
+        }
+        
+        switch section {
+        case .saveBAC: saveBloodAlcoholContentToHealthKit()
+        default: break
+        }
+        
+        print("worked")
+        
     }
     /*
     // MARK: - Navigation
@@ -103,5 +171,41 @@ class ProfileViewController: UITableViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    func loadDrinks()
+    {
+        print("Loading...")
+        // we need to make a "request" to get the Category objects
+        // via the persistent container
+        let request: NSFetchRequest<Drink> = Drink.fetchRequest()
+        // with a sql SELECT statement we usually specify a WHERE clause if we want to filter rows from the table we are selecting from
+        // if we want to filter, we need to add a "predicate" to our request... we will do this later for Items
+        do
+        {
+            drinks = try context.fetch(request)
+        }
+        catch
+        {
+            print("Error loading categories \(error)")
+        }
+    }
+}
 
+extension Date {
+    static var yesterday: Date { return Date().dayBefore }
+    static var tomorrow:  Date { return Date().dayAfter }
+    var dayBefore: Date {
+        return Calendar.current.date(byAdding: .day, value: -1, to: noon)!
+    }
+    var dayAfter: Date {
+        return Calendar.current.date(byAdding: .day, value: 1, to: noon)!
+    }
+    var noon: Date {
+        return Calendar.current.date(bySettingHour: 12, minute: 0, second: 0, of: self)!
+    }
+    var month: Int {
+        return Calendar.current.component(.month,  from: self)
+    }
+    var isLastDayOfMonth: Bool {
+        return dayAfter.month != month
+    }
 }

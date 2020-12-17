@@ -48,6 +48,7 @@ class ViewController: UIViewController {
         currDrink.time = Date()
         
         drinks.append(currDrink)
+        saveDrink()
     }
     @IBAction func addShot(_ sender: Any)
     {
@@ -56,6 +57,7 @@ class ViewController: UIViewController {
         currDrink.time = Date()
         
         drinks.append(currDrink)
+        saveDrink()
     }
     @IBAction func addWine(_ sender: Any)
     {
@@ -64,6 +66,7 @@ class ViewController: UIViewController {
         currDrink.time = Date()
         
         drinks.append(currDrink)
+        saveDrink()
     }
     @IBAction func addMixed(_ sender: Any)
     {
@@ -72,6 +75,7 @@ class ViewController: UIViewController {
         currDrink.time = Date()
         
         drinks.append(currDrink)
+        saveDrink()
     }
     
     
