@@ -170,8 +170,8 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Time" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="6Ut-zg-9RU">
-                                                    <rect key="frame" x="356" y="12" width="38" height="20.5"/>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Name" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="6Ut-zg-9RU">
+                                                    <rect key="frame" x="349" y="12" width="45" height="20.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -194,8 +194,8 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Time" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="f3B-FI-5N0">
-                                                    <rect key="frame" x="356" y="12" width="38" height="20.5"/>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Age" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="f3B-FI-5N0">
+                                                    <rect key="frame" x="364" y="12" width="30" height="20.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -218,8 +218,8 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Time" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="PTx-tN-eTE">
-                                                    <rect key="frame" x="356" y="12" width="38" height="20.5"/>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Sex" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="PTx-tN-eTE">
+                                                    <rect key="frame" x="366" y="12" width="28" height="20.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -242,8 +242,8 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Time" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="N4b-bc-e2D">
-                                                    <rect key="frame" x="356" y="12" width="38" height="20.5"/>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Weight" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="N4b-bc-e2D">
+                                                    <rect key="frame" x="340.5" y="12" width="53.5" height="20.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -284,7 +284,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Possible button" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="NNL-mi-0DK">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Save BAC to HealthApp" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="NNL-mi-0DK">
                                                     <rect key="frame" x="20" y="0.0" width="374" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -306,11 +306,11 @@
                         <color key="badgeColor" name="AccentColor"/>
                     </tabBarItem>
                     <connections>
-                        <outlet property="BACLabel" destination="G94-y1-4c0" id="zQB-oM-8Jp"/>
-                        <outlet property="ageLabel" destination="sYx-9u-Obl" id="BHj-Ii-8Ol"/>
-                        <outlet property="biologicalSexLabel" destination="3vV-AB-3k3" id="hDA-qT-itN"/>
-                        <outlet property="nameLabel" destination="kHD-sp-a7w" id="zKt-00-rj4"/>
-                        <outlet property="weightLabel" destination="kWk-5E-hKy" id="tLA-Nq-nAF"/>
+                        <outlet property="BACLabel" destination="G94-y1-4c0" id="KE8-fj-5nj"/>
+                        <outlet property="ageLabel" destination="f3B-FI-5N0" id="wLm-pZ-wWz"/>
+                        <outlet property="biologicalSexLabel" destination="PTx-tN-eTE" id="OmW-e5-6ue"/>
+                        <outlet property="nameLabel" destination="6Ut-zg-9RU" id="Jiy-Mm-vXx"/>
+                        <outlet property="weightLabel" destination="N4b-bc-e2D" id="AvL-Vu-AYK"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pkr-2K-Dey" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

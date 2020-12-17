@@ -82,10 +82,11 @@ class ProfileViewController: UITableViewController {
     }
     
     private func saveBloodAlcoholContentToHealthKit() {
-        guard let bloodAlcoholContent = profile.bloodAlcoholContent else {
+        guard var bloodAlcoholContent = profile.bloodAlcoholContent else {
             print("missing bac")
             return
         }
+        bloodAlcoholContent -= (drinksOverTime()*0.015)
         ProfileDataStore.saveBloodAlcoholContent(bloodAlcoholContent: bloodAlcoholContent, date: Date())
     }
     
@@ -110,13 +111,16 @@ class ProfileViewController: UITableViewController {
             print(weight)
             weightLabel.text = "\(weight)"
         }
-        if let BAC = profile.bloodAlcoholContent {
-            print(BAC)
-            BACLabel.text = "\(BAC)"
+        if var BAC = (profile.bloodAlcoholContent){
+            BAC -= (drinksOverTime()*0.015)
+            let displayBAC = BAC.truncate(places: 2)
+            //print(displayBAC)
+            BACLabel.text = "\(displayBAC)%"
         }
+        
     }
     
-    private func drinksOverTime(){
+    private func drinksOverTime() -> Double{
         var pastDrinks = [Drink]()
         let now = Date()
         let yesterday = Date().dayBefore
@@ -131,7 +135,7 @@ class ProfileViewController: UITableViewController {
         print("Past 24 hr: \(pastDrinks)")
         var latestDrink = Drink()
         if pastDrinks.count == 0 {
-            print (0)
+            return 0
         } else if pastDrinks.count >= 1 {
             latestDrink = pastDrinks[0]
             if pastDrinks.count > 1 {
@@ -142,9 +146,10 @@ class ProfileViewController: UITableViewController {
                 }
             }
         }
-        let timeDrinking = Date().timeIntervalSince(latestDrink.time!)
-        
-        print (timeDrinking)
+        var timeDrinking = Date().timeIntervalSince(latestDrink.time!)
+        timeDrinking = timeDrinking/3600
+        print ("Time spent Drinking!!!\n\(timeDrinking) Min")
+        return timeDrinking
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -207,5 +212,13 @@ extension Date {
     }
     var isLastDayOfMonth: Bool {
         return dayAfter.month != month
+    }
+}
+
+extension Double
+{
+    func truncate(places : Int)-> Double
+    {
+        return Double(floor(pow(10.0, Double(places)) * self)/pow(10.0, Double(places)))
     }
 }

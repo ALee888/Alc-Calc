@@ -12,6 +12,8 @@ class DrinkTableViewController: UITableViewController {
     
     var drinkArray = [Drink]()
     var sortedDrink = [Drink]()
+    var sections = [Date]()
+    
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     override func viewDidLoad() {
@@ -31,6 +33,7 @@ class DrinkTableViewController: UITableViewController {
 
     // MARK: - Table view data source
 
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         var numOfDays = 0
         let date = Date()
@@ -58,36 +61,52 @@ class DrinkTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        let drink = self.sortedDrink[section]
-        let date = drink.time
+        let section = self.sections[section]
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MM/dd/yyyy"
-        return dateFormatter.string(from: date!)
+        return dateFormatter.string(from: section)
     }
 
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //print("Establish rows")
         // #warning Incomplete implementation, return the number of rows
-        if section == 0{
-            return drinkArray.count
+        var rows = 0
+        let section = self.sections[section]
+        let calendar = Calendar.current
+        let day = calendar.component(.day, from: section)
+        for drink in drinkArray {
+            let drinkDay = calendar.component(.day, from: drink.time!)
+            if day == drinkDay {
+                rows += 1
+            }
         }
-        return 0
+        return rows
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        //print("Establish cells")
-        let row = indexPath.row
-        let drink = sortedDrink[row]
-        
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        //print("Establish cells")
+        var cellArray = [Drink]()
+        let section = self.sections[indexPath.section]
+        let calendar = Calendar.current
+        let day = calendar.component(.day, from: section)
+        for drink in drinkArray {
+            let drinkDay = calendar.component(.day, from: drink.time!)
+            if day == drinkDay {
+                cellArray.append(drink)
+            }
+        }
+        
+        let drink = cellArray[indexPath.row]
+        
         cell.textLabel?.text = ("\(String(drink.alcohol!))")
         
         //establish time
-        let calendar = Calendar.current
         let hour = calendar.component(.hour, from: drink.time!)
         let minute = calendar.component(.minute, from: drink.time!)
+        
         cell.detailTextLabel?.text = ("\(hour):\(minute)")
         
         return cell
@@ -142,13 +161,38 @@ class DrinkTableViewController: UITableViewController {
      */
     func sortDrink()
     {
-        
         let tempArr = drinkArray
         
         sortedDrink = tempArr.sorted(by: {
             $0.time!.compare($1.time!) == .orderedDescending
         })
+        
+        let today = Date()
+        if (sortedDrink.count == 0)
+        {
+            sections.append(today)
+        } else if (sortedDrink.count >= 1) {
+            sections.append(sortedDrink[0].time!)
+            if (sortedDrink.count > 1) {
+                let Cal = Calendar.current
+                    //let currDay = Cal.component(.day, from: today)
+                    for drink in sortedDrink
+                    {
+                        let Day = Cal.component(.day, from: drink.time!)
+                        for obj in sections
+                        {
+                            let comparisonDay = Cal.component(.day, from: obj)
+                            if Day != comparisonDay
+                            {
+                                sections.append(drink.time!)
+                            }
+                        }
+                    }
+            }
+        }
     }
+    
+    
     func loadDrinks()
     {
         print("Loading...")
