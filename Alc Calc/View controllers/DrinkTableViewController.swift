@@ -124,25 +124,45 @@ class DrinkTableViewController: UITableViewController {
         return true
     }
     */
+    @IBAction func editButtonPressed(_ sender: UIButton) {
+        print("editing")
+        let newEditingMode = !tableView.isEditing
+        tableView.setEditing(newEditingMode, animated: true)
+        
+    }
+    
 
-    /*
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // Delete the row from the data source
+            
+            context.delete(sortedDrink[indexPath.row])
+            print("SCARED")
+            sortedDrink.remove(at: indexPath.row)
+            print("REMOVED")
             tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+            print("ROWS DELETED")
+        }
     }
-    */
-
     /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
+    override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath)
+          {
+              let drink = drinkArray.remove(at: sourceIndexPath.row)
+              drinkArray.insert(drink, at: destinationIndexPath.row)
+              tableView.reloadData()
+          }
     */
+    /**
+     // Override to support rearranging the table view.
+     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
+         let drink = sortedDrink.remove(at: fromIndexPath.row)
+         sortedDrink.insert(drink, at: fromIndexPath.row)
+         tableView.reloadData()
+         
+     }
+     */
+    
 
     /*
     // Override to support conditional rearranging of the table view.
@@ -152,18 +172,7 @@ class DrinkTableViewController: UITableViewController {
     }
     */
 
-    /*
-    // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-    /**
-    Read of CRUD
-     */
     func sortDrink()
     {
         let tempArr = drinkArray
