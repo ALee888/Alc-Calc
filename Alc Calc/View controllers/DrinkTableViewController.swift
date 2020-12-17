@@ -131,7 +131,7 @@ class DrinkTableViewController: UITableViewController {
         
     }
     
-
+    /*
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
@@ -145,7 +145,7 @@ class DrinkTableViewController: UITableViewController {
             print("ROWS DELETED")
         }
     }
-    /*
+   
     override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath)
           {
               let drink = drinkArray.remove(at: sourceIndexPath.row)
