@@ -87,7 +87,8 @@ class ProfileViewController: UITableViewController {
             return
         }
         bloodAlcoholContent -= (drinksOverTime()*0.015)
-        ProfileDataStore.saveBloodAlcoholContent(bloodAlcoholContent: bloodAlcoholContent, date: Date())
+        let formattedBAC = bloodAlcoholContent/100
+        ProfileDataStore.saveBloodAlcoholContent(bloodAlcoholContent: formattedBAC, date: Date())
     }
     
     private func updateLabels(){

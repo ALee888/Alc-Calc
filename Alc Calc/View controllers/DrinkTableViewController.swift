@@ -104,11 +104,16 @@ class DrinkTableViewController: UITableViewController {
         cell.textLabel?.text = ("\(String(drink.alcohol!))")
         
         //establish time
-        let hour = calendar.component(.hour, from: drink.time!)
+        var hour = calendar.component(.hour, from: drink.time!)
         let minute = calendar.component(.minute, from: drink.time!)
-        
-        cell.detailTextLabel?.text = ("\(hour):\(minute)")
-        
+        if hour > 12 {
+            hour -= 12
+        }
+        if minute < 10 {
+            cell.detailTextLabel?.text = ("\(hour):0\(minute)")
+        } else {
+            cell.detailTextLabel?.text = ("\(hour):\(minute)")
+        }
         return cell
     }
 
@@ -164,7 +169,7 @@ class DrinkTableViewController: UITableViewController {
         let tempArr = drinkArray
         
         sortedDrink = tempArr.sorted(by: {
-            $0.time!.compare($1.time!) == .orderedDescending
+            $0.time!.compare($1.time!) == .orderedAscending
         })
         
         let today = Date()
