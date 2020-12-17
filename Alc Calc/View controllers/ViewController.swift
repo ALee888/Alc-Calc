@@ -12,14 +12,18 @@ import CoreData
 class ViewController: UIViewController {
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    let drinks = [Drink]()
+    var drinks = [Drink]()
     
     @IBOutlet weak var drinkLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("LOAD VIEWCONTROLLER")
         // Do any additional setup after loading the view.
         authorizeHealthKit()
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        print("Appear")
     }
     
     private func authorizeHealthKit() {
@@ -37,9 +41,40 @@ class ViewController: UIViewController {
         }
     }
     
-    @IBAction func drink(_ sender: Any) {
+    @IBAction func addBeer(_ sender: Any)
+    {
+        let currDrink = Drink(context: context)
+        currDrink.alcohol = "🍺"
+        currDrink.time = Date()
         
+        drinks.append(currDrink)
     }
+    @IBAction func addShot(_ sender: Any)
+    {
+        let currDrink = Drink(context: context)
+        currDrink.alcohol = "🥃"
+        currDrink.time = Date()
+        
+        drinks.append(currDrink)
+    }
+    @IBAction func addWine(_ sender: Any)
+    {
+        let currDrink = Drink(context: context)
+        currDrink.alcohol = "🍷"
+        currDrink.time = Date()
+        
+        drinks.append(currDrink)
+    }
+    @IBAction func addMixed(_ sender: Any)
+    {
+        let currDrink = Drink(context: context)
+        currDrink.alcohol = "🍹"
+        currDrink.time = Date()
+        
+        drinks.append(currDrink)
+    }
+    
+    
     
     func saveDrink()
     {

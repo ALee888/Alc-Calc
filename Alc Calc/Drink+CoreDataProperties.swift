@@ -18,6 +18,11 @@ extension Drink {
 
     @NSManaged public var alcohol: String?
     @NSManaged public var time: Date?
+    static let dateFormatter: DateFormatter = {
+        let myDateFormatter = DateFormatter()
+        myDateFormatter.dateFormat = "MM/dd/yyyy"
+        return myDateFormatter
+    }()
 
 }
 

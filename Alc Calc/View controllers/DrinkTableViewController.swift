@@ -11,11 +11,12 @@ import CoreData
 class DrinkTableViewController: UITableViewController {
     
     var drinkArray = [Drink]()
+    var sortedDrink = [Drink]()
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        print("Load DrinkTableViewController")
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -23,20 +24,72 @@ class DrinkTableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
         loadDrinks()
     }
+    override func viewDidAppear(_ animated: Bool) {
+        print("appear")
+        loadDrinks()
+    }
 
     // MARK: - Table view data source
 
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        var numOfDays = 0
+        let date = Date()
+        let cal = Calendar.current
+        var prevDay = cal.component(.day, from: date)
+        if sortedDrink.count == 0
+        {
+            print("Sections: 0")
+            return 0
+        } else {
+            for drink in sortedDrink {
+                let calendar = Calendar.current
+                let day = calendar.component(.day, from: drink.time!)
+                if numOfDays == 0 {
+                    prevDay = day
+                    numOfDays += 1
+                } else if day != prevDay {
+                    prevDay = day
+                    numOfDays += 1
+                }
+            }
+        }
+        print("Sections: \(numOfDays)")
+        return numOfDays
+    }
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        let drink = self.sortedDrink[section]
+        let date = drink.time
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM/dd/yyyy"
+        return dateFormatter.string(from: date!)
+    }
+
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        //print("Establish rows")
         // #warning Incomplete implementation, return the number of rows
-        
+        if section == 0{
+            return drinkArray.count
+        }
         return 0
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        //print("Establish cells")
+        let row = indexPath.row
+        let drink = sortedDrink[row]
         
-
+        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        cell.textLabel?.text = ("\(String(drink.alcohol!))")
+        
+        //establish time
+        let calendar = Calendar.current
+        let hour = calendar.component(.hour, from: drink.time!)
+        let minute = calendar.component(.minute, from: drink.time!)
+        cell.detailTextLabel?.text = ("\(hour):\(minute)")
+        
         return cell
     }
 
@@ -87,8 +140,18 @@ class DrinkTableViewController: UITableViewController {
     /**
     Read of CRUD
      */
+    func sortDrink()
+    {
+        
+        let tempArr = drinkArray
+        
+        sortedDrink = tempArr.sorted(by: {
+            $0.time!.compare($1.time!) == .orderedDescending
+        })
+    }
     func loadDrinks()
     {
+        print("Loading...")
         // we need to make a "request" to get the Category objects
         // via the persistent container
         let request: NSFetchRequest<Drink> = Drink.fetchRequest()
@@ -102,6 +165,7 @@ class DrinkTableViewController: UITableViewController {
         {
             print("Error loading categories \(error)")
         }
+        sortDrink()
         tableView.reloadData()
     }
 }

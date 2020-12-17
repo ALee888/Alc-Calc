@@ -8,16 +8,17 @@
 import UIKit
 import HealthKit
 
-class ProfileViewController: UIViewController {
+class ProfileViewController: UITableViewController {
 
     @IBOutlet private var nameLabel:UILabel!
     @IBOutlet private var ageLabel:UILabel!
     @IBOutlet private var weightLabel:UILabel!
     @IBOutlet private var biologicalSexLabel:UILabel!
-    
+    @IBOutlet private var BAC: UILabel!
     private let profile = Profile()
     
     override func viewDidLoad() {
+        
         updateHealthInfo()
         super.viewDidLoad()
 
@@ -92,15 +93,6 @@ class ProfileViewController: UIViewController {
             print(weight)
             weightLabel.text = "\(weight)"
         }
-    }
-    
-    func addDrinks()
-    {
-        profile.drinks += 1
-    }
-    func getDrinks() -> Double{
-        let person = profile
-        return person.drinks
     }
     /*
     // MARK: - Navigation
